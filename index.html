@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        #calculatorDisplay {
+            display: grid;
+            grid-template-columns: auto;
+            justify-items: stretch;
+            width: 400px;
+            height: 50px;
+            margin: 0 auto;
+            background-color: #7dbf79;
+        }
+
+        #calculatorKeypad {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            justify-items: stretch;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <div id="calculatorDisplay">
+            <div id="display"></div>
+        </div>
+        <div id="calculatorKeypad">
+            <button class="displayable" id="7">7</button>
+            <button class="displayable" id="8">8</button>
+            <button class="displayable" id="9">9</button>
+            <div class="button" id="space1"></div>
+            <button class="button" id="cancel">Cancel</button>
+            <button class="displayable" id="4">4</button>
+            <button class="displayable" id="5">5</button>
+            <button class="displayable" id="6">6</button>
+            <button class="displayable" id="x">x</button>
+            <button class="displayable" id="/">/</button>
+            <button class="displayable" id="1">1</button>
+            <button class="displayable" id="2">2</button>
+            <button class="displayable" id="3">3</button>
+            <button class="displayable" id="+">+</button>
+            <button class="displayable" id="-">-</button>
+            <div class="button" id="space2"></div>
+            <button class="displayable" id="0">0</button>
+            <div class="button" id="space3"></div>
+            <div class="button" id="space4"></div>
+            <button class="button" id="=">=</button>
+        </div>
+    </div>
+    <script>
+        function add(num1, num2) { solution = num1 + num2; }
+        function subtract(num1, num2) { solution = num1 - num2; }
+        function multiply(num1, num2) { solution = num1 * num2; }
+        function buttonide(num1, num2) { solution = num1 / num2; }
+
+        function operate(operator, num1, num2) {
+            switch (operator) {
+                case "+": add(num1, num2);
+                    break;
+                case "-": subtract(num1, num2);
+                    break;
+                case "x": multiply(num1, num2);
+                    break;
+                case "/": buttonide(num1, num2);
+            }
+        }
+
+        let display = document.getElementById("display");
+        let displayContent = "";
+        let solution;
+        let digits = [];
+        let operator;
+        let num1;
+        let num2;
+
+        function addToDisplay(element) {
+            displayContent += element;
+            display.innerHTML = displayContent;
+        }
+
+        function clearDisplay() {
+            displayContent = "";
+            display.innerHTML = displayContent;
+        }
+
+        const buttons = document.querySelectorAll("button")
+        buttons.forEach((button) => {
+            if (button.className === "displayable") {
+                button.addEventListener('click', (e) => {
+                    addToDisplay(button.id);
+                });
+            }
+        });
+
+        let equalsButton = document.getElementById("=");
+        equalsButton.addEventListener('click', (e) => {
+            if (displayContent.includes("+")) { operator = "+" }
+            else if (displayContent.includes("-")) { operator = "-" }
+            else if (displayContent.includes("x")) { operator = "x" }
+            else if (displayContent.includes("/")) { operator = "/" }
+            evaluateCalculation();
+        })
+
+        let cancelButton = document.getElementById("cancel");
+        cancelButton.addEventListener('click', (e) => {
+            clearDisplay();
+        });
+
+        function evaluateCalculation() {
+            digits = displayContent.split(operator);
+            num1 = parseInt(digits[0]);
+            num2 = parseInt(digits[1]);
+            operate(operator, num1, num2);
+            // at this point the String expression is in the displayContent variable
+            // the Int solution is in the solution variable
+            // if digits[1] has another operator i need to do something
+            // i need to split it on the remaining operator
+            // use my current solution as the new num1
+            // use the right side of the new split as num2
+            // keep repeating until no more operators left in string expression
+            // the order of if statements could mimic the order of operator precedence
+            clearDisplay();
+            addToDisplay(solution);
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
