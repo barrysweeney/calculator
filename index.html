@@ -109,11 +109,11 @@
         let equalsButton = document.getElementById("=");
         equalsButton.addEventListener('click', (e) => {
             if (displayContent[displayContent.length - 1] === "+" ||
-            displayContent[displayContent.length - 1] === "-" ||
-            displayContent[displayContent.length - 1] === "x" ||
-            displayContent[displayContent.length - 1] === "/" ) {
+                displayContent[displayContent.length - 1] === "-" ||
+                displayContent[displayContent.length - 1] === "x" ||
+                displayContent[displayContent.length - 1] === "/") {
                 alert("Please finish expression");
-            }else{
+            } else {
                 findOperands(displayContent);
                 findOperators(displayContent);
                 findSolution();
@@ -146,7 +146,7 @@
         }
 
         function displaySolution() {
-            displayContent = solution;
+            displayContent = Math.round(solution * 10) / 10;
             display.innerHTML = displayContent;
         }
 
