@@ -108,10 +108,17 @@
 
         let equalsButton = document.getElementById("=");
         equalsButton.addEventListener('click', (e) => {
-            findOperands(displayContent);
-            findOperators(displayContent);
-            findSolution();
-            displaySolution();
+            if (displayContent[displayContent.length - 1] === "+" ||
+            displayContent[displayContent.length - 1] === "-" ||
+            displayContent[displayContent.length - 1] === "x" ||
+            displayContent[displayContent.length - 1] === "/" ) {
+                alert("Please finish expression");
+            }else{
+                findOperands(displayContent);
+                findOperators(displayContent);
+                findSolution();
+                displaySolution();
+            }
         })
 
         function findOperands(stringToCheck) {
@@ -135,10 +142,10 @@
                 operands.splice(0, 0, solution)
                 operators.shift();
             }
-            
+
         }
 
-        function displaySolution(){
+        function displaySolution() {
             displayContent = solution;
             display.innerHTML = displayContent;
         }
