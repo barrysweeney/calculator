@@ -59,10 +59,10 @@
         </div>
     </div>
     <script>
-        function add(num1, num2) { solution = num1 + num2; }
-        function subtract(num1, num2) { solution = num1 - num2; }
-        function multiply(num1, num2) { solution = num1 * num2; }
-        function buttonide(num1, num2) { solution = num1 / num2; }
+        function add(num1, num2) { solution = (parseInt(num1) + parseInt(num2)); }
+        function subtract(num1, num2) { solution = (parseInt(num1) - parseInt(num2)); }
+        function multiply(num1, num2) { solution = (parseInt(num1) * parseInt(num2)); }
+        function buttonide(num1, num2) { solution = (parseInt(num1) / parseInt(num2)); }
 
         function operate(operator, num1, num2) {
             switch (operator) {
@@ -78,11 +78,13 @@
 
         let display = document.getElementById("display");
         let displayContent = "";
-        let solution;
+        let solution = 0;
         let digits = [];
         let operator;
         let num1;
         let num2;
+        let operators = []
+        let operands;
 
         function addToDisplay(element) {
             displayContent += element;
@@ -92,6 +94,7 @@
         function clearDisplay() {
             displayContent = "";
             display.innerHTML = displayContent;
+            solution = 0;
         }
 
         const buttons = document.querySelectorAll("button")
@@ -105,34 +108,47 @@
 
         let equalsButton = document.getElementById("=");
         equalsButton.addEventListener('click', (e) => {
-            if (displayContent.includes("+")) { operator = "+" }
-            else if (displayContent.includes("-")) { operator = "-" }
-            else if (displayContent.includes("x")) { operator = "x" }
-            else if (displayContent.includes("/")) { operator = "/" }
-            evaluateCalculation();
+            findOperands(displayContent);
+            findOperators(displayContent);
+            findSolution();
         })
+
+        function findOperands(stringToCheck) {
+            operands = stringToCheck.split(/[^0-9]/);
+        }
+
+        function findOperators(stringToCheck) {
+            operators = stringToCheck.split(/[0-9]/).filter(v => v !== "");
+        }
 
         let cancelButton = document.getElementById("cancel");
         cancelButton.addEventListener('click', (e) => {
             clearDisplay();
         });
 
-        function evaluateCalculation() {
-            digits = displayContent.split(operator);
-            num1 = parseInt(digits[0]);
-            num2 = parseInt(digits[1]);
-            operate(operator, num1, num2);
-            // at this point the String expression is in the displayContent variable
-            // the Int solution is in the solution variable
-            // if digits[1] has another operator i need to do something
-            // i need to split it on the remaining operator
-            // use my current solution as the new num1
-            // use the right side of the new split as num2
-            // keep repeating until no more operators left in string expression
-            // the order of if statements could mimic the order of operator precedence
-            clearDisplay();
-            addToDisplay(solution);
+        function findSolution() {
+            // for (let i = 0; i < operands.length - 1; i++) {
+            //     operandIndex = displayContent.indexOf(operands[i]);
+            //     operatorIndex = operandIndex + (operands[i].length);
+            //     operator = displayContent.charAt(operatorIndex);
+            //     operate(operator, operands[i], operands[i + 1]);
+            //    displayContent = solution + "" + displayContent.slice(displayContent.search(/[^0-9]/))
+            // }
+
+            while(operators.length!=0){
+            operate(operators[0], operands[0], operands[1]);
+            operands.shift();
+            operands.shift();
+            operands.splice(0,0,solution)
+            operators.shift();
+            }
         }
+
+        // maybe  ahwile loop while operators[] still exist
+        // keep doing something and remove operators and operands with each iteration
+        // removing for loop with i and stuff
+        // display content could = solution + a slice on the search for the regex value 
+
 
 
 
