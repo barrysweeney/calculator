@@ -111,6 +111,7 @@
             findOperands(displayContent);
             findOperators(displayContent);
             findSolution();
+            displaySolution();
         })
 
         function findOperands(stringToCheck) {
@@ -127,31 +128,20 @@
         });
 
         function findSolution() {
-            // for (let i = 0; i < operands.length - 1; i++) {
-            //     operandIndex = displayContent.indexOf(operands[i]);
-            //     operatorIndex = operandIndex + (operands[i].length);
-            //     operator = displayContent.charAt(operatorIndex);
-            //     operate(operator, operands[i], operands[i + 1]);
-            //    displayContent = solution + "" + displayContent.slice(displayContent.search(/[^0-9]/))
-            // }
-
-            while(operators.length!=0){
-            operate(operators[0], operands[0], operands[1]);
-            operands.shift();
-            operands.shift();
-            operands.splice(0,0,solution)
-            operators.shift();
+            while (operators.length != 0) {
+                operate(operators[0], operands[0], operands[1]);
+                operands.shift();
+                operands.shift();
+                operands.splice(0, 0, solution)
+                operators.shift();
             }
+            
         }
 
-        // maybe  ahwile loop while operators[] still exist
-        // keep doing something and remove operators and operands with each iteration
-        // removing for loop with i and stuff
-        // display content could = solution + a slice on the search for the regex value 
-
-
-
-
+        function displaySolution(){
+            displayContent = solution;
+            display.innerHTML = displayContent;
+        }
 
     </script>
 </body>
