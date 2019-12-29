@@ -32,7 +32,7 @@
         .operations {
             background-color: #d6d4e0;
         }
-        
+
         .displayable {
             background-color: #b8a9c9;
         }
@@ -48,7 +48,7 @@
             <button class="displayable" id="7">7</button>
             <button class="displayable" id="8">8</button>
             <button class="displayable" id="9">9</button>
-            <div class="button" id="space1"></div>
+            <div id="space1"></div>
             <button class="operations" id="cancel">Cancel</button>
             <button class="displayable" id="4">4</button>
             <button class="displayable" id="5">5</button>
@@ -60,10 +60,10 @@
             <button class="displayable" id="3">3</button>
             <button class="operations" id="+">+</button>
             <button class="operations" id="-">-</button>
-            <div class="button" id="space2"></div>
+            <div id="space2"></div>
             <button class="displayable" id="0">0</button>
-            <div class="button" id="space3"></div>
-            <div class="button" id="space4"></div>
+            <div id="space3"></div>
+            <div id="space4"></div>
             <button class="operations" id="=">=</button>
         </div>
     </div>
@@ -115,7 +115,7 @@
 
         const buttons = document.querySelectorAll("button")
         buttons.forEach((button) => {
-            if (button.className === "displayable"|| button.className === "operations") {
+            if (button.className === "displayable" || button.className === "operations") {
                 button.addEventListener('click', (e) => {
                     addToDisplay(button.id);
                 });
