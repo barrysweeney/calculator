@@ -11,7 +11,8 @@
             width: 400px;
             height: 50px;
             margin: 0 auto;
-            background-color: #7dbf79;
+            background-color: #5b9aa0;
+            color: white;
         }
 
         #calculatorKeypad {
@@ -27,6 +28,14 @@
             padding: 10px;
             margin: 10px;
         }
+
+        .operations {
+            background-color: #d6d4e0;
+        }
+        
+        .displayable {
+            background-color: #b8a9c9;
+        }
     </style>
 </head>
 
@@ -40,22 +49,22 @@
             <button class="displayable" id="8">8</button>
             <button class="displayable" id="9">9</button>
             <div class="button" id="space1"></div>
-            <button class="button" id="cancel">Cancel</button>
+            <button class="operations" id="cancel">Cancel</button>
             <button class="displayable" id="4">4</button>
             <button class="displayable" id="5">5</button>
             <button class="displayable" id="6">6</button>
-            <button class="displayable" id="x">x</button>
-            <button class="displayable" id="/">/</button>
+            <button class="operations" id="x">x</button>
+            <button class="operations" id="/">/</button>
             <button class="displayable" id="1">1</button>
             <button class="displayable" id="2">2</button>
             <button class="displayable" id="3">3</button>
-            <button class="displayable" id="+">+</button>
-            <button class="displayable" id="-">-</button>
+            <button class="operations" id="+">+</button>
+            <button class="operations" id="-">-</button>
             <div class="button" id="space2"></div>
             <button class="displayable" id="0">0</button>
             <div class="button" id="space3"></div>
             <div class="button" id="space4"></div>
-            <button class="button" id="=">=</button>
+            <button class="operations" id="=">=</button>
         </div>
     </div>
     <script>
@@ -106,7 +115,7 @@
 
         const buttons = document.querySelectorAll("button")
         buttons.forEach((button) => {
-            if (button.className === "displayable") {
+            if (button.className === "displayable"|| button.className === "operations") {
                 button.addEventListener('click', (e) => {
                     addToDisplay(button.id);
                 });
