@@ -7,6 +7,10 @@
     margin: 0 auto;
     background-color: #5b9aa0;
     color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: right;
+
 }
 
 #calculatorKeypad {
@@ -21,6 +25,7 @@
 button {
     padding: 10px;
     margin: 10px;
+    border-radius: 5px;
 }
 
 .operations {
